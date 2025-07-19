@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Projects - Alphafour Infrastructure Pvt Ltd</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-color: #2c5f5f;
+            --secondary-color: #4a9d9d;
+            --accent-color: #ff6b35;
+            --text-dark: #333;
+            --text-light: #666;
+            --text-white: #fff;
+            --bg-light: #f8f9fa;
+            --bg-white: #fff;
+            --border-color: #e0e0e0;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles - Always Mobile Layout */
+        .header {
+            background: var(--bg-white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+         .logo-image {
+    height: 100px;
+}
+
+        .logo-icon {
+            font-size: 32px;
+            color: var(--primary-color);
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .logo-text p {
+            font-size: 10px;
+            color: var(--text-light);
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Hide desktop navigation - always use mobile menu */
+        .nav-links {
+            display: none !important;
+        }
+
+        .register-btn {
+            background: var(--primary-color);
+            color: var(--text-white);
+            border: none;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .register-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Always show mobile menu toggle */
+        .mobile-menu-toggle {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            background-color: rgba(44, 95, 95, 0.1);
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-white);
+            z-index: 9999;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu.active {
+            display: block;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-white);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            color: var(--text-white);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 25px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 16px;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mobile-nav-links a:hover {
+            background: linear-gradient(90deg, var(--bg-light), transparent);
+            color: var(--primary-color);
+            padding-left: 35px;
+        }
+
+        .mobile-nav-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary-color);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover::before {
+            transform: scaleY(1);
+        }
+
+        .mobile-dropdown {
+            position: relative;
+        }
+
+        .mobile-dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .mobile-dropdown-toggle i.fa-chevron-down {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+            margin-left: auto;
+        }
+
+        .mobile-dropdown.active .mobile-dropdown-toggle i.fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        .mobile-dropdown-menu {
+            display: none;
+            background: var(--bg-light);
+            margin: 10px 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-dropdown-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mobile-dropdown-menu a {
+            padding: 12px 20px;
+            font-size: 14px;
+            color: var(--text-light);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            margin: 0;
+        }
+
+        .mobile-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-dropdown-menu a:hover {
+            color: var(--primary-color);
+            background-color: var(--bg-white);
+            padding-left: 30px;
+        }
+
+        .mobile-register-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-white);
+            border: none;
+            padding: 15px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: calc(100% - 50px);
+            margin: 25px 25px 0;
+            border-radius: 25px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(44, 95, 95, 0.3);
+        }
+
+        .mobile-register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 95, 95, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 60vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(44,95,95,0.8), rgba(74,157,157,0.6));
+            z-index: 1;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 8vw, 80px);
+            font-weight: 700;
+            color: var(--text-white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 6px;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 80px 0;
+            background: var(--bg-white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 60px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card::before {
+            content: 'COMING SOON';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: var(--text-white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .project-image {
+            height: 700px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 30px;
+        }
+
+        .project-info h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .project-location {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .project-details {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .project-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .feature {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            font-size: 12px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .project-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .timeline-item h5 {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .timeline-item p {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .project-pricing {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .price-range {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .early-bird {
+            background: var(--primary-color);
+            color: var(--text-white);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .interest-btn {
+            width: 100%;
+            background: var(--primary-color);
+            color: var(--text-white);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .interest-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Pre-Launch Section */
+        .prelaunch-section {
+            background: var(--bg-light);
+            padding: 80px 0;
+        }
+
+        .prelaunch-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .prelaunch-content h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .prelaunch-content p {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .benefit-item {
+            background: var(--bg-white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .benefit-item i {
+            font-size: 48px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .benefit-item h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .benefit-item p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--text-white);
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #e55a2b;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-light);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .footer-logo p {
+            font-size: 8px;
+            color: var(--text-light);
+            line-height: 1;
+        }
+
+        .footer-info p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links h4 {
+            font-size: 14px;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links h4:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* Fixed Contact Bar */
+        .fixed-contact-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary-color);
+            display: flex;
+            z-index: 999;
+        }
+
+        .contact-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            color: var(--text-white);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: var(--secondary-color);
+        }
+
+        .contact-item i {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .contact-item span {
+            font-size: 12px;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .whatsapp-float a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            color: var(--text-white);
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 24px;
+            box-shadow: var(--shadow-hover);
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float a:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                letter-spacing: 3px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                height: 50vh;
+            }
+
+            .hero-title {
+                font-size: 36px;
+                letter-spacing: 2px;
+            }
+
+            .projects-section,
+            .prelaunch-section {
+                padding: 60px 0;
+            }
+
+            .prelaunch-content h2 {
+                font-size: 28px;
+            }
+        }
+        @media (max-width: 600px) {
+            .logo {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                gap: 4px;
+            }
+
+            .logo-image {
+                height: 80px;
+            }
+
+            .logo-text h1 {
+                font-size: 16px;
+                margin: 0;
+            }
+
+            .logo-text p {
+                font-size: 12px;
+                margin: 0;
+            }
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo-img {
+            height: 100px;
+        }
+
+        .footer-logo .logo-text h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .footer-logo .logo-text p {
+            margin: 0;
+            font-size: 12px;
+            color: #ccc; /* Adjust for footer background */
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <span class="logo-icon"></span>
+                <div class="logo-text">
+                    <h1>ALPHAFOUR</h1>
+                    <p>INFRASTRUCTURE PVT LTD</p>
+                </div>
+            </div>
+            <button class="mobile-menu-close" id="mobileMenuClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{{ url_for('about') }}"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li class="mobile-dropdown">
+                <a href="#" class="mobile-dropdown-toggle">
+                    <span><i class="fas fa-building"></i> Apartments</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="mobile-dropdown-menu">
+                    <li><a href="{{ url_for('completed') }}">Completed</a></li>
+                    <li><a href="{{ url_for('ongoing') }}">Ongoing</a></li>
+                    <li><a href="{{ url_for('upcoming') }}">Upcoming</a></li>
+                </ul>
+            </li>
+            <li><a href="{{ url_for('real_estate_news') }}"><i class="fas fa-newspaper"></i> Real Estate News</a></li>
+            <li><a href="{{ url_for('joint_venture') }}"><i class="fas fa-handshake"></i> Joint Venture</a></li>
+        </ul>
+        <button class="mobile-register-btn" onclick="window.location.href='joint-venture.html'">
+            <i class="fas fa-user-plus"></i>
+            REGISTER
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+               <div class="logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="AlphaFour Logo" class="logo-image">
+                    <div class="logo-text">
+                        <h1>ALPHAFOUR</h1>
+                        <p>INFRASTRUCTURE PVT LTD</p>
+                    </div>
+                </div>
+
+                <nav class="nav">
+                    <button class="register-btn" onclick="window.location.href='joint-venture.html'">REGISTER</button>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Upcoming Projects">
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">UPCOMING PROJECTS</h1>
+        </div>
+    </section>
+
+    <!-- Upcoming Projects -->
+    <section class="projects-section">
+        <div class="container">
+            <h2 class="section-title">Future Developments</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="{{ url_for('static', filename='images/upcoming.png') }}" alt="Alphafour Heights">
+                    </div>
+                    <div class="project-info">
+                        <h3>Alphafour Heights</h3>
+                        <p class="project-location"><i class="fas fa-map-marker-alt"></i> Borivali, Mumbai</p>
+                        <p class="project-details">Ultra-luxury residential towers with 300 units, world-class amenities, and panoramic city views.</p>
+                        <div class="project-features">
+                            <span class="feature">3/4/5 BHK</span>
+                            <span class="feature">Infinity Pool</span>
+                            <span class="feature">Helipad</span>
+                            <span class="feature">Smart City</span>
+                        </div>
+                        <div class="project-timeline">
+                            <div class="timeline-item">
+                                <h5>Launch</h5>
+                                <p>Q2 2024</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h5>Possession</h5>
+                                <p>Q4 2027</p>
+                            </div>
+                        </div>
+                        <div class="project-pricing">
+                            <span class="price-range">₹2.5Cr - ₹8Cr</span>
+                            <span class="early-bird">20% OFF</span>
+                        </div>
+                        <button class="interest-btn" onclick="showInterest('Alphafour Heights')">Register Interest</button>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Pre-Launch Benefits -->
+    <section class="prelaunch-section">
+        <div class="container">
+            <div class="prelaunch-content">
+                <h2>Pre-Launch Advantages</h2>
+                <p>Be among the first to secure your dream home with exclusive pre-launch benefits and pricing.</p>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <i class="fas fa-tags"></i>
+                        <h4>Best Prices</h4>
+                        <p>Up to 20% discount on launch prices</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-home"></i>
+                        <h4>Choice of Units</h4>
+                        <p>Pick the best floor and facing</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <h4>Flexible Payment</h4>
+                        <p>Extended payment schedules</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-gift"></i>
+                        <h4>Exclusive Offers</h4>
+                        <p>Special launch day benefits</p>
+                    </div>
+                </div>
+                <a href="joint-venture.html" class="cta-btn">Register Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="AlphaFour Logo" class="footer-logo-img">
+                        <div class="logo-text">
+                            <h3>ALPHAFOUR</h3>
+                            <p>INFRASTRUCTURE PVT LTD</p>
+                        </div>
+                    </div>
+
+                    <div class="footer-info">
+                      <p>ALPHAFOUR INFRASTRUCTURE PVT LTD</p>
+                      <p>Kurios Software Park, 3rd Floor, Plot No:24</p>
+                      <p>2nd Cross Street, Ambattur Industrial Estate,</p>
+                      <p>Chennai 600058, Tamilnadu</p>
+                      <p style="margin-top: 15px;">sales@alphafour.com</p>
+                      <p>+91 9444314567</p>
+                  </div>
+              </div>
+              <div class="footer-right">
+                  <div class="footer-links">
+                      <h4>Terms and conditions</h4>
+                      <h4>Privacy Policy</h4>
+                      <h4>Blog</h4>
+                      <h4>Sitemap</h4>
+                      <h4>Contact us</h4>
+                  </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/918072212364" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
+
+            // Toggle mobile menu
+            mobileMenuToggle.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            // Close mobile menu
+            mobileMenuClose.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            // Close menu when clicking outside
+            mobileMenu.addEventListener('click', function(e) {
+                if (e.target === mobileMenu) {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Handle mobile dropdown toggles
+            mobileDropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.mobile-dropdown-toggle');
+                const menu = dropdown.querySelector('.mobile-dropdown-menu');
+                
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                    menu.classList.toggle('active');
+                });
+            });
+
+            // Close mobile menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Show interest function
+        function showInterest(projectName) {
+            alert(`Thank you for your interest in ${projectName}! We will contact you soon with more details and exclusive offers.`);
+            // In a real application, this would send data to a server
+            window.location.href = 'joint-venture.html';
+        }
+    </script>
+</body>
+</html>

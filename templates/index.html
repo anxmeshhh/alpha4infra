@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alphafour Infrastructure Pvt Ltd</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+      /* CSS Variables for consistent theming */
+      :root {
+          --primary-color: #2c5f5f;
+          --secondary-color: #4a9d9d;
+          --accent-color: #ff6b35;
+          --text-dark: #333;
+          --text-light: #666;
+          --text-white: #fff;
+          --bg-light: #f8f9fa;
+          --bg-white: #fff;
+          --border-color: #e0e0e0;
+          --shadow: 0 2px 10px rgba(0,0,0,0.1);
+          --shadow-hover: 0 5px 20px rgba(0,0,0,0.15);
+      }
+
+      /* Reset and Base Styles */
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+
+      body {
+          font-family: 'Inter', sans-serif;
+          line-height: 1.6;
+          color: var(--text-dark);
+          overflow-x: hidden;
+      }
+
+      .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+      }
+
+      /* Header Styles - Always Mobile Layout */
+      .header {
+          background: var(--bg-white);
+          box-shadow: var(--shadow);
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+      }
+
+      .header-content {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0px 0;
+      }
+
+      .logo {
+          display: flex;
+          align-items: center;
+          gap: 0px;
+      }
+      .logo-image {
+            height: 80px;
+        }
+        @media (max-width: 600px) {
+            .logo {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                gap: 4px;
+            }
+
+            .logo-image {
+                height: 80px;
+            }
+
+            .logo-text h1 {
+                font-size: 16px;
+                margin: 0;
+            }
+
+            .logo-text p {
+                font-size: 12px;
+                margin: 0;
+            }
+        }
+
+
+      .logo-icon {
+          font-size: 32px;
+          color: var(--primary-color);
+      }
+
+      .logo-text h1 {
+          font-size: 24px;
+          font-weight: 700;
+          color: var(--primary-color);
+          line-height: 1;
+      }
+
+      .logo-text p {
+          font-size: 10px;
+          color: var(--text-light);
+          font-weight: 400;
+          line-height: 1;
+      }
+
+      .nav {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+      }
+
+      /* Hide desktop navigation - always use mobile menu */
+      .nav-links {
+          display: none !important;
+      }
+
+      .register-btn {
+          background: var(--primary-color);
+          color: var(--text-white);
+          border: none;
+          padding: 12px 24px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          border-radius: 4px;
+      }
+
+      .register-btn:hover {
+          background: var(--secondary-color);
+      }
+
+      /* Always show mobile menu toggle */
+      .mobile-menu-toggle {
+          display: block;
+          background: none;
+          border: none;
+          font-size: 24px;
+          color: var(--primary-color);
+          cursor: pointer;
+          padding: 8px;
+          border-radius: 4px;
+          transition: background-color 0.3s ease;
+      }
+
+      .mobile-menu-toggle:hover {
+          background-color: rgba(44, 95, 95, 0.1);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          background: var(--bg-white);
+          z-index: 9999;
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+          overflow-y: auto;
+          box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .mobile-menu.active {
+          display: block;
+          transform: translateX(0);
+      }
+
+      .mobile-menu-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 25px;
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          color: var(--text-white);
+          position: sticky;
+          top: 0;
+          z-index: 10;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .mobile-menu-close {
+          background: none;
+          border: none;
+          color: var(--text-white);
+          font-size: 24px;
+          cursor: pointer;
+          padding: 8px;
+          border-radius: 50%;
+          transition: all 0.3s ease;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .mobile-menu-close:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: rotate(90deg);
+      }
+
+      .mobile-nav-links {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+      }
+
+      .mobile-nav-links a {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          padding: 18px 25px;
+          text-decoration: none;
+          color: var(--text-dark);
+          font-weight: 500;
+          font-size: 16px;
+          border-bottom: 1px solid var(--border-color);
+          transition: all 0.3s ease;
+          position: relative;
+      }
+
+      .mobile-nav-links a:hover {
+          background: linear-gradient(90deg, var(--bg-light), transparent);
+          color: var(--primary-color);
+          padding-left: 35px;
+      }
+
+      .mobile-nav-links a::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background: var(--primary-color);
+          transform: scaleY(0);
+          transition: transform 0.3s ease;
+      }
+
+      .mobile-nav-links a:hover::before {
+          transform: scaleY(1);
+      }
+
+      .mobile-dropdown {
+          position: relative;
+      }
+
+      .mobile-dropdown-toggle {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+      }
+
+      .mobile-dropdown-toggle i.fa-chevron-down {
+          font-size: 12px;
+          transition: transform 0.3s ease;
+          margin-left: auto;
+      }
+
+      .mobile-dropdown.active .mobile-dropdown-toggle i.fa-chevron-down {
+          transform: rotate(180deg);
+      }
+
+      .mobile-dropdown-menu {
+          display: none;
+          background: var(--bg-light);
+          margin: 10px 20px;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .mobile-dropdown-menu.active {
+          display: block;
+          animation: slideDown 0.3s ease;
+      }
+
+      @keyframes slideDown {
+          from {
+              opacity: 0;
+              transform: translateY(-10px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      .mobile-dropdown-menu a {
+          padding: 12px 20px;
+          font-size: 14px;
+          color: var(--text-light);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+          margin: 0;
+      }
+
+      .mobile-dropdown-menu a:last-child {
+          border-bottom: none;
+      }
+
+      .mobile-dropdown-menu a:hover {
+          color: var(--primary-color);
+          background-color: var(--bg-white);
+          padding-left: 30px;
+      }
+
+      .mobile-register-btn {
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          color: var(--text-white);
+          border: none;
+          padding: 15px 25px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          width: calc(100% - 50px);
+          margin: 25px 25px 0;
+          border-radius: 25px;
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          box-shadow: 0 4px 15px rgba(44, 95, 95, 0.3);
+      }
+
+      .mobile-register-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(44, 95, 95, 0.4);
+      }
+
+      /* Prevent body scroll when menu is open */
+      body.menu-open {
+          overflow: hidden;
+      }
+
+      /* Hero Section */
+      .hero {
+          position: relative;
+          height: 100vh;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .hero-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -2;
+      }
+
+      .hero-bg img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+      }
+
+      .hero-bg::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0,0,0,0.4);
+          z-index: 1;
+      }
+
+      .hero-content {
+          text-align: center;
+          z-index: 2;
+      }
+
+      .hero-title {
+          font-size: clamp(60px, 12vw, 120px);
+          font-weight: 700;
+          color: var(--text-white);
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+          letter-spacing: 8px;
+      }
+
+      .hero-bottom {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: var(--bg-white);
+          padding: 20px 0;
+          z-index: 2;
+      }
+
+      /* Marquee Container */
+      .marquee-container {
+          overflow: hidden;
+          width: 100%;
+          white-space: nowrap;
+      }
+
+      .marquee {
+          display: inline-block;
+          animation: scroll-left 30s linear infinite;
+          font-size: 14px;
+          color: var(--text-light);
+      }
+
+      .marquee span {
+          display: inline-block;
+          padding: 0 30px;
+          position: relative;
+      }
+
+      .marquee span:not(:last-child)::after {
+          content: '|';
+          position: absolute;
+          right: 15px;
+          color: var(--border-color);
+      }
+
+      @keyframes scroll-left {
+          0% {
+              transform: translateX(100%);
+          }
+          100% {
+              transform: translateX(-100%);
+          }
+      }
+
+      /* About Section */
+      .about {
+          padding: 80px 0;
+          background: var(--bg-light);
+      }
+
+      .about-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+          margin-bottom: 40px;
+      }
+
+      .about-text p {
+          font-size: 16px;
+          line-height: 1.8;
+          color: var(--text-light);
+          margin-bottom: 30px;
+      }
+
+      .read-more-btn {
+          background: var(--accent-color);
+          color: var(--text-white);
+          border: none;
+          padding: 12px 24px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+      }
+
+      .read-more-btn:hover {
+          background: #e55a2b;
+          transform: translateY(-2px);
+      }
+
+      .about-image img {
+          width: 100%;
+          height: 400px;
+          object-fit: cover;
+          border-radius: 8px;
+      }
+
+      .contact-bar {
+          display: flex;
+          justify-content: center;
+          gap: 60px;
+          background: var(--bg-white);
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: var(--shadow);
+      }
+
+      .contact-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
+          transition: color 0.3s ease;
+      }
+
+      .contact-item:hover {
+          color: var(--primary-color);
+      }
+
+      .contact-item i {
+          font-size: 18px;
+      }
+
+      /* Directors Section */
+      .directors {
+          padding: 80px 0;
+          background: var(--bg-white);
+      }
+
+      .section-title {
+          text-align: center;
+          font-size: 32px;
+          font-weight: 700;
+          color: var(--text-dark);
+          margin-bottom: 60px;
+          letter-spacing: 2px;
+      }
+
+      .directors-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+          gap: 60px;
+      }
+
+      .director-card {
+          background: var(--bg-white);
+          border-radius: 12px;
+          box-shadow: var(--shadow);
+          overflow: hidden;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          position: relative;
+      }
+
+      .director-card:hover {
+          transform: translateY(-5px);
+          box-shadow: var(--shadow-hover);
+      }
+
+      .director-image {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin: 30px auto 20px;
+          border: 4px solid var(--primary-color);
+      }
+
+      .director-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+      }
+
+      .director-card h3 {
+          text-align: center;
+          font-size: 20px;
+          font-weight: 600;
+          color: var(--text-dark);
+          margin-bottom: 5px;
+      }
+
+      .director-title {
+          text-align: center;
+          color: var(--text-light);
+          font-size: 14px;
+          margin-bottom: 20px;
+      }
+
+      .director-info {
+          padding: 0 30px 30px;
+      }
+
+      .director-info p {
+          font-size: 14px;
+          line-height: 1.6;
+          color: var(--text-light);
+          margin-bottom: 20px;
+      }
+
+      /* Quality Section */
+      .quality {
+          padding: 80px 0;
+          background: var(--bg-light);
+      }
+
+      .quality-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+      }
+
+      .quality-text p {
+          font-size: 16px;
+          line-height: 1.8;
+          color: var(--text-light);
+          margin-bottom: 40px;
+      }
+
+      .quality-features {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+      }
+
+      .feature-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 15px;
+      }
+
+      .feature-icon {
+          color: var(--accent-color);
+          font-weight: bold;
+          font-size: 16px;
+      }
+
+      .quality-image img {
+          width: 100%;
+          height: 500px;
+          object-fit: cover;
+          border-radius: 8px;
+      }
+
+      /* News Section */
+      .news {
+          padding: 80px 0;
+          background: var(--bg-white);
+      }
+
+      .news-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 40px;
+      }
+
+      .news-card {
+          background: var(--bg-white);
+          border-radius: 12px;
+          box-shadow: var(--shadow);
+          overflow: hidden;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .news-card:hover {
+          transform: translateY(-5px);
+          box-shadow: var(--shadow-hover);
+      }
+
+      .news-image {
+          height: 220px;
+          overflow: hidden;
+      }
+
+      .news-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+      }
+
+      .news-card:hover .news-image img {
+          transform: scale(1.05);
+      }
+
+      .news-content {
+          padding: 25px;
+      }
+
+      .news-content h3 {
+          font-size: 18px;
+          font-weight: 600;
+          color: var(--text-dark);
+          margin-bottom: 15px;
+          line-height: 1.4;
+      }
+
+      .news-meta {
+          display: flex;
+          gap: 20px;
+          font-size: 12px;
+          color: var(--text-light);
+      }
+
+      /* Testimonials Section */
+      .testimonials {
+          padding: 80px 0;
+          background: var(--bg-light);
+      }
+
+      .testimonial-content {
+          text-align: center;
+          max-width: 800px;
+          margin: 0 auto;
+      }
+
+      .testimonial-author {
+          margin-bottom: 30px;
+      }
+
+      .testimonial-author h4 {
+          font-size: 18px;
+          font-weight: 600;
+          color: var(--text-dark);
+          margin-bottom: 5px;
+      }
+
+      .testimonial-author p {
+          color: var(--text-light);
+          font-size: 14px;
+      }
+
+      .testimonial-quote blockquote {
+          font-size: 20px;
+          line-height: 1.6;
+          color: var(--text-light);
+          font-style: italic;
+          position: relative;
+      }
+
+      .testimonial-quote blockquote::before,
+      .testimonial-quote blockquote::after {
+          content: '"';
+          font-size: 48px;
+          color: var(--accent-color);
+          font-weight: bold;
+      }
+
+      .testimonial-quote blockquote::before {
+          margin-right: 10px;
+      }
+
+      .testimonial-quote blockquote::after {
+          margin-left: 10px;
+      }
+
+      /* Footer */
+      .footer {
+          background: var(--bg-light);
+          padding: 60px 0 100px;
+      }
+
+      .footer-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          margin-bottom: 40px;
+      }
+
+      .footer-logo {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 20px;
+      }
+
+      .footer-logo h3 {
+          font-size: 20px;
+          font-weight: 700;
+          color: var(--primary-color);
+          line-height: 1;
+      }
+
+      .footer-logo p {
+          font-size: 8px;
+          color: var(--text-light);
+          line-height: 1;
+      }
+
+      .footer-info p {
+          font-size: 14px;
+          color: var(--text-light);
+          margin-bottom: 5px;
+      }
+
+      .footer-links {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          margin-bottom: 30px;
+      }
+
+      .footer-links h4 {
+          font-size: 14px;
+          color: var(--text-dark);
+          cursor: pointer;
+          transition: color 0.3s ease;
+      }
+
+      .footer-links h4:hover {
+          color: var(--primary-color);
+      }
+
+      .social-links {
+          display: flex;
+          gap: 15px;
+          margin-bottom: 20px;
+      }
+
+      .social-links a {
+          width: 40px;
+          height: 40px;
+          background: var(--primary-color);
+          color: var(--text-white);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          text-decoration: none;
+          transition: background-color 0.3s ease;
+      }
+
+      .social-links a:hover {
+          background: var(--secondary-color);
+      }
+
+      .copyright {
+          font-size: 12px;
+          color: var(--text-light);
+      }
+
+      .footer-contact-bar {
+          display: flex;
+          justify-content: center;
+          gap: 60px;
+          background: var(--bg-white);
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: var(--shadow);
+      }
+
+      /* Fixed Bottom Contact Bar - Updated to match image */
+      .fixed-contact-bar {
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: var(--bg-white);
+          border-radius: 50px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+          z-index: 1000;
+          padding: 8px;
+          max-width: 90%;
+          width: auto;
+      }
+
+      .contact-buttons {
+          display: flex;
+          align-items: center;
+          gap: 0;
+      }
+
+      .contact-buttons .contact-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 12px 20px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          border-radius: 50px;
+          text-decoration: none;
+          color: var(--text-dark);
+          font-size: 14px;
+          font-weight: 500;
+          white-space: nowrap;
+          border: none;
+          background: transparent;
+      }
+
+      .contact-buttons .contact-item:hover {
+          background: var(--bg-light);
+          color: var(--primary-color);
+      }
+
+      .contact-buttons .contact-item i {
+          font-size: 16px;
+          color: var(--text-dark);
+      }
+
+      .contact-buttons .contact-item:hover i {
+          color: var(--primary-color);
+      }
+
+      /* Specific icon colors */
+      .contact-buttons .contact-item.call i {
+          color: #007bff;
+      }
+
+      .contact-buttons .contact-item.whatsapp i {
+          color: #25d366;
+      }
+
+      .contact-buttons .contact-item.chat i {
+          color: #6c757d;
+      }
+
+      .contact-buttons .contact-item.enquiry i {
+          color: var(--primary-color);
+      }
+
+      /* WhatsApp Float Button - Hidden since we have it in contact bar */
+      .whatsapp-float {
+          display: none;
+      }
+      .footer-logo-img {
+    height: 100px;
+}
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+          .hero-title {
+              letter-spacing: 3px;
+          }
+
+          .about-content,
+          .quality-content {
+              grid-template-columns: 1fr;
+              gap: 50px;
+          }
+
+          .directors-grid {
+              grid-template-columns: 1fr;
+              gap: 50px;
+          }
+
+          .news-grid {
+              grid-template-columns: repeat(2, 1fr);
+              gap: 30px;
+          }
+
+          .marquee span {
+              padding: 0 20px;
+          }
+
+          .footer-content {
+              grid-template-columns: 1fr;
+              gap: 40px;
+          }
+
+          .fixed-contact-bar {
+              bottom: 15px;
+              max-width: 95%;
+          }
+
+          .contact-buttons .contact-item {
+              padding: 10px 16px;
+              font-size: 13px;
+          }
+
+          .contact-buttons .contact-item i {
+              font-size: 15px;
+          }
+      }
+
+      @media (max-width: 576px) {
+          .container {
+              padding: 0 20px;
+          }
+
+          .hero-title {
+              font-size: 60px;
+              letter-spacing: 4px;
+          }
+
+          .marquee span {
+              padding: 0 15px;
+              font-size: 12px;
+          }
+
+          .about-content {
+              grid-template-columns: 1fr;
+              gap: 40px;
+          }
+
+          .about-image img {
+              height: 300px;
+          }
+
+          .directors-grid {
+              grid-template-columns: 1fr;
+              gap: 40px;
+          }
+
+          .quality-content {
+              grid-template-columns: 1fr;
+              gap: 40px;
+          }
+
+          .quality-features {
+              grid-template-columns: 1fr;
+          }
+
+          .quality-image img {
+              height: 300px;
+          }
+
+          .news-grid {
+              grid-template-columns: 1fr;
+              gap: 30px;
+          }
+
+          .footer-content {
+              grid-template-columns: 1fr;
+              gap: 40px;
+          }
+
+          .social-links {
+              justify-content: center;
+          }
+
+          .fixed-contact-bar {
+              bottom: 10px;
+              max-width: 98%;
+              padding: 6px;
+          }
+
+          .contact-buttons .contact-item {
+              padding: 8px 12px;
+              font-size: 12px;
+              gap: 6px;
+          }
+
+          .contact-buttons .contact-item i {
+              font-size: 14px;
+          }
+      }
+
+      @media (max-width: 480px) {
+          .container {
+              padding: 0 15px;
+          }
+
+          .hero {
+              height: 85vh;
+          }
+
+          .hero-title {
+              font-size: 38px;
+              letter-spacing: 2px;
+          }
+
+          .marquee span {
+              padding: 0 8px;
+              font-size: 10px;
+          }
+
+          .hero-bottom {
+              padding: 15px 0;
+          }
+
+          .about {
+              padding: 50px 0;
+          }
+
+          .about-content {
+              grid-template-columns: 1fr;
+              gap: 25px;
+          }
+
+          .about-image img {
+              height: 220px;
+          }
+
+          .about-text p {
+              font-size: 14px;
+              line-height: 1.7;
+          }
+
+          .directors {
+              padding: 50px 0;
+          }
+
+          .directors-grid {
+              grid-template-columns: 1fr;
+              gap: 25px;
+          }
+
+          .director-card {
+              margin: 0 10px;
+          }
+
+          .director-image {
+              width: 100px;
+              height: 100px;
+              margin: 25px auto 15px;
+          }
+
+          .quality {
+              padding: 50px 0;
+          }
+
+          .quality-content {
+              grid-template-columns: 1fr;
+              gap: 25px;
+          }
+
+          .quality-features {
+              grid-template-columns: 1fr;
+              gap: 15px;
+          }
+
+          .quality-image img {
+              height: 220px;
+          }
+
+          .quality-text p {
+              font-size: 14px;
+              line-height: 1.7;
+          }
+
+          .news {
+              padding: 50px 0;
+          }
+
+          .news-grid {
+              grid-template-columns: 1fr;
+              gap: 20px;
+          }
+
+          .testimonials {
+              padding: 50px 0;
+          }
+
+          .footer {
+              padding: 40px 0 80px;
+          }
+
+          .footer-content {
+              grid-template-columns: 1fr;
+              gap: 25px;
+          }
+
+          .social-links {
+              justify-content: center;
+          }
+
+          .fixed-contact-bar {
+              bottom: 8px;
+              left: 8px;
+              right: 8px;
+              transform: none;
+              max-width: none;
+              width: auto;
+              padding: 4px;
+          }
+
+          .contact-buttons .contact-item {
+              padding: 6px 8px;
+              font-size: 11px;
+              gap: 4px;
+              flex: 1;
+              justify-content: center;
+          }
+
+          .contact-buttons .contact-item i {
+              font-size: 12px;
+          }
+      }
+
+      /* Smooth Scrolling */
+      html {
+          scroll-behavior: smooth;
+      }
+
+      /* Loading Animation */
+      .fade-in {
+          opacity: 0;
+          transform: translateY(30px);
+          animation: fadeInUp 0.8s ease forwards;
+      }
+
+      @keyframes fadeInUp {
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      /* Interactive Elements */
+      .director-card,
+      .news-card {
+          cursor: pointer;
+      }
+
+      .feature-item:hover {
+          color: var(--primary-color);
+      }
+
+      /* Focus States for Accessibility */
+      button:focus,
+      a:focus {
+          outline: 2px solid var(--primary-color);
+          outline-offset: 2px;
+      }
+  </style>
+</head>
+<body>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-header">
+          <div class="logo">
+              <span class="logo-icon"></span>
+              <div class="logo-text">
+                  <h1>ALPHAFOUR</h1>
+                  <p>INFRASTRUCTURE PVT LTD</p>
+              </div>
+          </div>
+          <button class="mobile-menu-close" id="mobileMenuClose">
+              <i class="fas fa-times"></i>
+          </button>
+      </div>
+      <ul class="mobile-nav-links">
+            <li><a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{{ url_for('about') }}"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li class="mobile-dropdown">
+                <a href="#" class="mobile-dropdown-toggle">
+                    <span><i class="fas fa-building"></i> Apartments</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="mobile-dropdown-menu">
+                    <li><a href="{{ url_for('completed') }}">Completed</a></li>
+                    <li><a href="{{ url_for('ongoing') }}">Ongoing</a></li>
+                    <li><a href="{{ url_for('upcoming') }}">Upcoming</a></li>
+                </ul>
+            </li>
+            <li><a href="{{ url_for('real_estate_news') }}"><i class="fas fa-newspaper"></i> Real Estate News</a></li>
+            <li><a href="{{ url_for('joint_venture') }}"><i class="fas fa-handshake"></i> Joint Venture</a></li>
+        </ul>
+      <button class="mobile-register-btn" onclick="window.location.href='joint-venture.html'">
+          <i class="fas fa-user-plus"></i>
+          REGISTER
+      </button>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+      <div class="container">
+          <div class="header-content">
+              <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="AlphaFour Logo" class="logo-image">
+                <div class="logo-text">
+                    <h1>ALPHAFOUR</h1>
+                    <p>INFRASTRUCTURE PVT LTD</p>
+                </div>
+            </div>
+
+              <nav class="nav">
+                  <button class="register-btn" onclick="window.location.href='joint-venture.html'">REGISTER</button>
+                  <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                      <i class="fas fa-bars"></i>
+                  </button>
+              </nav>
+          </div>
+      </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+      <div class="hero-bg">
+          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Construction Site">
+      </div>
+      <div class="hero-content">
+          <h1 class="hero-title">ALPHAFOUR</h1>
+      </div>
+      <div class="hero-bottom">
+          <div class="marquee-container">
+              <div class="marquee">
+                  <span>Innovation</span>
+                  <span>Cutting-Edge Design</span>
+                  <span>Smart Home Features</span>
+                  <span>Quality</span>
+                  <span>Premium Materials Skilled Craftsmanship</span>
+                  <span>Sustainability</span>
+                  <span>Eco-Friendly Practices</span>
+                  <span>Innovation</span>
+                  <span>Cutting-Edge Design</span>
+                  <span>Smart Home Features</span>
+                  <span>Quality</span>
+                  <span>Premium Materials Skilled Craftsmanship</span>
+                  <span>Sustainability</span>
+                  <span>Eco-Friendly Practices</span>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+      <div class="container">
+          <div class="about-content">
+              <div class="about-text">
+                  <p>Alphafour Infrastructure is a premier real estate development company committed to creating exceptional living spaces. With years of experience and a team of dedicated professionals, we have established a reputation for delivering high-quality residential projects that stand the test of time.</p>
+                  <button class="read-more-btn" onclick="window.location.href='about.html'">Read More <i class="fas fa-arrow-right"></i></button>
+              </div>
+              <div class="about-image">
+                  <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern Interior">
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Directors Section -->
+  <section class="directors" id="directors">
+      <div class="container">
+          <h2 class="section-title">DIRECTORS</h2>
+          <div class="directors-grid">
+              <div class="director-card">
+                  <div class="director-image">
+                      <img src="{{ url_for('static', filename='images/mr.png') }}" alt="Mr. Parmahan A.P">
+                  </div>
+                  <h3>Mr. Parmahan A.P</h3>
+                  <p class="director-title">Managing Director</p>
+                  <div class="director-info">
+                      <p>Mr. Parmahan A.P with over 25 years in infrastructure and construction, is the Managing Director of Alpha four Infrastructure Pvt Ltd, and Director of EDS Inds and Ennadu Power Coating Solutions Pvt Ltd. His expertise includes DC Motors, and Marathon Summary products. He has led the development of over 75 million square feet of premium residential and commercial projects.</p>
+                      <button class="read-more-btn" onclick="window.location.href='about.html'">Read More</button>
+                  </div>
+              </div>
+              <div class="director-card">
+                  <div class="director-image">
+                      <img src="{{ url_for('static', filename='images/mrs.png') }}" alt="Ms. Swarnmangal Raghunathty">
+                  </div>
+                  <h3>Ms. Swarnmangal Raghunathty</h3>
+                  <p class="director-title">Director</p>
+                  <div class="director-info">
+                      <p>Ms. Swarnmangal Raghunathty, Chairman of Ennadu Power Coating Solutions India Pvt Ltd and Founder-Director of AFHIFI Pvt Ltd, is a seasoned engineer and strategist with 20 years of experience in steel coating, melting, and construction industries.</p>
+                      <button class="read-more-btn" onclick="window.location.href='about.html'">Read More</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Quality Section -->
+  <section class="quality" id="quality">
+      <div class="container">
+          <h2 class="section-title">THE QUALITY WE OFFER</h2>
+          <div class="quality-content">
+              <div class="quality-text">
+                  <p>Quality is not just a word for us; it is our way of life. From planning to execution, everything we touch. Specialising in apartment construction, we are dedicated to delivering superior living spaces that combine luxurious comfort with functional design. Each project is a testament to our commitment to excellence in every aspect of our work.</p>
+                  
+                  <div class="quality-features">
+                      <div class="feature-column">
+                          <div class="feature-item">
+                              <span class="feature-icon">✓</span>
+                              <span>Premium Materials</span>
+                          </div>
+                          <div class="feature-item">
+                              <span class="feature-icon">✓</span>
+                              <span>Expert Craftsmanship</span>
+                          </div>
+                          <div class="feature-item">
+                              <span class="feature-icon">✓</span>
+                              <span>Sustainable Practices</span>
+                          </div>
+                      </div>
+                      <div class="feature-column">
+                          <div class="feature-item">
+                              <span class="feature-icon">✓</span>
+                              <span>Client-Centered Approach</span>
+                          </div>
+                          <div class="feature-item">
+                              <span class="feature-icon">✓</span>
+                              <span>Continuous Improvement</span>
+                          </div>
+                          <div class="feature-item">
+                              <span class="feature-icon">✓</span>
+                              <span>Earthquake Resistance</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="quality-image">
+                  <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern Building">
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- News Section -->
+  <section class="news" id="news">
+      <div class="container">
+          <h2 class="section-title">LATEST REAL ESTATE NEWS</h2>
+          <div class="news-grid">
+              <div class="news-card" onclick="window.location.href='real-estate-news.html'">
+                  <div class="news-image">
+                      <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="News 1">
+                  </div>
+                  <div class="news-content">
+                      <h3>Five Benefits of Living in an Apartment Complex</h3>
+                      <div class="news-meta">
+                          <span class="news-date">March 7, 2023</span>
+                          <span class="news-comments">4 Comments</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="news-card" onclick="window.location.href='real-estate-news.html'">
+                  <div class="news-image">
+                      <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="News 2">
+                  </div>
+                  <div class="news-content">
+                      <h3>The Ultimate Guide to Buying Your Perfect Apartment</h3>
+                      <div class="news-meta">
+                          <span class="news-date">April 15, 2023</span>
+                          <span class="news-comments">7 Comments</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="news-card" onclick="window.location.href='real-estate-news.html'">
+                  <div class="news-image">
+                      <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="News 3">
+                  </div>
+                  <div class="news-content">
+                      <h3>Discover Your Dream Apartment: A Comprehensive Guide</h3>
+                      <div class="news-meta">
+                          <span class="news-date">May 2, 2023</span>
+                          <span class="news-comments">3 Comments</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+      <div class="container">
+          <h2 class="section-title">TESTIMONIALS</h2>
+          <div class="testimonial-content">
+              <div class="testimonial-author">
+                  <h4>RAVI SHETTY</h4>
+                  <p>Happy Customer</p>
+              </div>
+              <div class="testimonial-quote">
+                  <blockquote>
+                      "Thanks to Alphafour Real Estate, I found the dream apartment quickly. Their professional and friendly team made buying opportunities!"
+                  </blockquote>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+      <div class="container">
+          <div class="footer-content">
+              <div class="footer-left">
+                  <div class="footer-logo">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="AlphaFour Logo" class="footer-logo-img">
+                        <div class="logo-text">
+                            <h3>ALPHAFOUR</h3>
+                            <p>INFRASTRUCTURE PVT LTD</p>
+                        </div>
+                    </div>
+
+                  <div class="footer-info">
+                      <p>ALPHAFOUR INFRASTRUCTURE PVT LTD</p>
+                      <p>Kurios Software Park, 3rd Floor, Plot No:24</p>
+                      <p>2nd Cross Street, Ambattur Industrial Estate,</p>
+                      <p>Chennai 600058, Tamilnadu</p>
+                      <p style="margin-top: 15px;">sales@alphafour.com</p>
+                      <p>+91 9444314567</p>
+                  </div>
+              </div>
+              <div class="footer-right">
+                  <div class="footer-links">
+                      <h4>Terms and conditions</h4>
+                      <h4>Privacy Policy</h4>
+                      <h4>Blog</h4>
+                      <h4>Sitemap</h4>
+                      <h4>Contact us</h4>
+                  </div>
+                  <div class="social-links">
+                      <a href="#"><i class="fab fa-instagram"></i></a>
+                      <a href="#"><i class="fab fa-facebook"></i></a>
+                      <a href="#"><i class="fab fa-twitter"></i></a>
+                      <a href="#"><i class="fab fa-linkedin"></i></a>
+                  </div>
+                  
+              </div>
+          </div>
+      </div>
+  </footer>
+
+  <!-- Fixed Bottom Contact Bar - Updated to match image exactly -->
+  <div class="fixed-contact-bar">
+      <div class="contact-buttons">
+          <button class="contact-item call" onclick="window.open('tel:+918072212364', '_self')">
+              <i class="fas fa-phone"></i>
+              <span>Call</span>
+          </button>
+          <button class="contact-item whatsapp" onclick="window.open('https://wa.me/918072212364', '_blank')">
+              <i class="fab fa-whatsapp"></i>
+              <span>Whatsapp</span>
+          </button>
+          <button class="contact-item chat" onclick="window.location.href='#contact'">
+              <i class="fas fa-comments"></i>
+              <span>Chat</span>
+          </button>
+          <button class="contact-item enquiry" onclick="window.location.href='joint-venture.html'">
+              <i class="fas fa-paper-plane"></i>
+              <span>Enquiry</span>
+          </button>
+      </div>
+  </div>
+
+  <!-- JavaScript for Mobile Menu -->
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+          const mobileMenu = document.getElementById('mobileMenu');
+          const mobileMenuClose = document.getElementById('mobileMenuClose');
+          const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
+          
+          // Open mobile menu
+          mobileMenuToggle.addEventListener('click', function() {
+              mobileMenu.classList.add('active');
+              document.body.classList.add('menu-open');
+          });
+          
+          // Close mobile menu
+          mobileMenuClose.addEventListener('click', function() {
+              mobileMenu.classList.remove('active');
+              document.body.classList.remove('menu-open');
+          });
+          
+          // Close menu when clicking on a link (except dropdown toggle)
+          document.querySelectorAll('.mobile-nav-links a:not(.mobile-dropdown-toggle)').forEach(link => {
+              link.addEventListener('click', function() {
+                  mobileMenu.classList.remove('active');
+                  document.body.classList.remove('menu-open');
+              });
+          });
+          
+          // Handle mobile dropdown toggles
+          mobileDropdowns.forEach(dropdown => {
+              const toggle = dropdown.querySelector('.mobile-dropdown-toggle');
+              const menu = dropdown.querySelector('.mobile-dropdown-menu');
+              
+              toggle.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  dropdown.classList.toggle('active');
+                  menu.classList.toggle('active');
+              });
+          });
+          
+          // Close menu when clicking outside
+          document.addEventListener('click', function(e) {
+              if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                  mobileMenu.classList.remove('active');
+                  document.body.classList.remove('menu-open');
+              }
+          });
+      });
+  </script>
+</body>
+</html>

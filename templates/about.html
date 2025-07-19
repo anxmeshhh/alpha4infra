@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Alphafour Infrastructure Pvt Ltd</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-color: #2c5f5f;
+            --secondary-color: #4a9d9d;
+            --accent-color: #ff6b35;
+            --text-dark: #333;
+            --text-light: #666;
+            --text-white: #fff;
+            --bg-light: #f8f9fa;
+            --bg-white: #fff;
+            --border-color: #e0e0e0;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles - Always Mobile Layout */
+        .header {
+            background: var(--bg-white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .logo-image {
+    height: 100px;
+}
+
+        .logo-icon {
+            font-size: 32px;
+            color: var(--primary-color);
+        }
+        @media (max-width: 600px) {
+            .logo {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                gap: 4px;
+            }
+
+            .logo-image {
+                height: 80px;
+            }
+
+            .logo-text h1 {
+                font-size: 16px;
+                margin: 0;
+            }
+
+            .logo-text p {
+                font-size: 12px;
+                margin: 0;
+            }
+        }
+
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .logo-text p {
+            font-size: 10px;
+            color: var(--text-light);
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Hide desktop navigation - always use mobile menu */
+        .nav-links {
+            display: none !important;
+        }
+
+        .register-btn {
+            background: var(--primary-color);
+            color: var(--text-white);
+            border: none;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .register-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Always show mobile menu toggle */
+        .mobile-menu-toggle {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            background-color: rgba(44, 95, 95, 0.1);
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-white);
+            z-index: 9999;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu.active {
+            display: block;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-white);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            color: var(--text-white);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 25px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 16px;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mobile-nav-links a:hover {
+            background: linear-gradient(90deg, var(--bg-light), transparent);
+            color: var(--primary-color);
+            padding-left: 35px;
+        }
+
+        .mobile-nav-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary-color);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover::before {
+            transform: scaleY(1);
+        }
+
+        .mobile-dropdown {
+            position: relative;
+        }
+
+        .mobile-dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .mobile-dropdown-toggle i.fa-chevron-down {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+            margin-left: auto;
+        }
+
+        .mobile-dropdown.active .mobile-dropdown-toggle i.fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        .mobile-dropdown-menu {
+            display: none;
+            background: var(--bg-light);
+            margin: 10px 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-dropdown-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mobile-dropdown-menu a {
+            padding: 12px 20px;
+            font-size: 14px;
+            color: var(--text-light);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            margin: 0;
+        }
+
+        .mobile-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-dropdown-menu a:hover {
+            color: var(--primary-color);
+            background-color: var(--bg-white);
+            padding-left: 30px;
+        }
+
+        .mobile-register-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-white);
+            border: none;
+            padding: 15px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: calc(100% - 50px);
+            margin: 25px 25px 0;
+            border-radius: 25px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(44, 95, 95, 0.3);
+        }
+
+        .mobile-register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 95, 95, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 60vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(44,95,95,0.8), rgba(74,157,157,0.6));
+            z-index: 1;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 8vw, 80px);
+            font-weight: 700;
+            color: var(--text-white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 6px;
+        }
+
+        /* Director Profile Section */
+        .director-profile {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .profile-info {
+            background: var(--bg-white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-info h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .profile-info .position {
+            font-size: 16px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .profile-info p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        /* Professional Experience Section */
+        .experience-section {
+            padding: 80px 0;
+            background: var(--bg-white);
+        }
+
+        .experience-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 60px;
+        }
+
+        .experience-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .experience-item {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: var(--bg-light);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .experience-item h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .experience-item p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        /* Areas of Expertise Section */
+        .expertise-section {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .expertise-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 60px;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .expertise-item {
+            background: var(--bg-white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .expertise-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .expertise-item h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .expertise-item p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-light);
+        }
+
+        /* Mission Vision Section */
+        .mission-vision {
+            padding: 80px 0;
+            background: var(--bg-white);
+        }
+
+        .mission-vision-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .mission-vision-text {
+            padding: 40px;
+        }
+
+        .mission-vision h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+        }
+
+        .mission-vision h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .mission-vision p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        .mission-vision-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .mission-vision-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-light);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .footer-logo p {
+            font-size: 8px;
+            color: var(--text-light);
+            line-height: 1;
+        }
+
+        .footer-info p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links h4 {
+            font-size: 14px;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links h4:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                letter-spacing: 3px;
+            }
+
+            .profile-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .profile-image img {
+                height: 400px;
+            }
+
+            .mission-vision-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                height: 50vh;
+            }
+
+            .hero-title {
+                font-size: 36px;
+                letter-spacing: 2px;
+            }
+
+            .profile-info {
+                padding: 25px;
+            }
+
+            .experience-item {
+                padding: 20px;
+            }
+
+            .expertise-item {
+                padding: 20px;
+            }
+
+            .director-profile,
+            .experience-section,
+            .expertise-section,
+            .mission-vision {
+                padding: 60px 0;
+            }
+        }
+        .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo-img {
+    height: 100px;
+}
+
+.footer-logo .logo-text h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footer-logo .logo-text p {
+    margin: 0;
+    font-size: 12px;
+    color: #ccc; /* Adjust for footer background */
+}
+
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <span class="logo-icon"></span>
+                <div class="logo-text">
+                    <h1>ALPHAFOUR</h1>
+                    <p>INFRASTRUCTURE PVT LTD</p>
+                </div>
+            </div>
+            <button class="mobile-menu-close" id="mobileMenuClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{{ url_for('about') }}"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li class="mobile-dropdown">
+                <a href="#" class="mobile-dropdown-toggle">
+                    <span><i class="fas fa-building"></i> Apartments</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="mobile-dropdown-menu">
+                    <li><a href="{{ url_for('completed') }}">Completed</a></li>
+                    <li><a href="{{ url_for('ongoing') }}">Ongoing</a></li>
+                    <li><a href="{{ url_for('upcoming') }}">Upcoming</a></li>
+                </ul>
+            </li>
+            <li><a href="{{ url_for('real_estate_news') }}"><i class="fas fa-newspaper"></i> Real Estate News</a></li>
+            <li><a href="{{ url_for('joint_venture') }}"><i class="fas fa-handshake"></i> Joint Venture</a></li>
+        </ul>
+        <button class="mobile-register-btn" onclick="window.location.href='joint-venture.html'">
+            <i class="fas fa-user-plus"></i>
+            REGISTER
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="AlphaFour Logo" class="logo-image">
+                    <div class="logo-text">
+                        <h1>ALPHAFOUR</h1>
+                        <p>INFRASTRUCTURE PVT LTD</p>
+                    </div>
+                </div>
+
+                <nav class="nav">
+                    <button class="register-btn" onclick="window.location.href='joint-venture.html'">REGISTER</button>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Modern Architecture">
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">DISCOVER US</h1>
+        </div>
+    </section>
+
+    <!-- Director Profile Section -->
+    <section class="director-profile">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-info">
+                    <h2>Mr. Parmahan A.P.</h2>
+                    <p class="position">Managing Director</p>
+                    <p>Mr. Parmahan A.P. is a distinguished professional with over 25 years of experience in infrastructure and construction. He is the Managing Director of Alpha four Infrastructure Pvt Ltd, and Director of EDS Inds and Ennadu Power Coating Solutions Pvt Ltd. His expertise includes DC Motors, and Marathon Summary products. He has led the development of over 75 million square feet of premium residential and commercial projects.</p>
+                    <p>With decades of experience in the industry, Mr. Parmahan has established himself as a visionary leader who brings innovative solutions to complex construction challenges. His leadership has been instrumental in positioning Alphafour as a trusted name in the infrastructure sector, delivering exceptional results across diverse projects.</p>
+                </div>
+                <div class="profile-image">
+                    <img src="{{ url_for('static', filename='images/mr.png') }}" alt="Mr. Parmahan A.P.">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Experience Section -->
+    <section class="experience-section">
+        <div class="container">
+            <h2 class="experience-title">Professional Experiences</h2>
+            <div class="experience-content">
+                <div class="experience-item">
+                    <h3>Managing Director, Alpha Four Infrastructure Pvt Ltd</h3>
+                    <p>As the Managing Director of Alpha four Infrastructure Pvt Ltd, Mr Parmahan A.P has led the development of over 2.5 million square feet of infrastructure in Chennai. His exceptional project management skills and strategic vision have ensured the successful completion of large-scale residential and commercial developments across the region.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <h3>Director, Ennadu Power Coating Solutions India Private Limited</h3>
+                    <p>Mr Parmahan A.P has served as Director of Ennadu Power Coating Solutions India Pvt Ltd, a seasoned expert in the power coating industry. As Director, he has been instrumental in establishing the company's reputation for excellence and innovation in power coating solutions, managing directorial of coaters. With a strong focus on customer satisfaction, he ensures both the strategic direction and daily operations of the company, ensuring that PMG Ltd remains at the forefront of the coating solutions market.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <h3>Director, EDS INDS Limited</h3>
+                    <p>Mr Parmahan A.P also serves as a Director of EDS INDS Limited, a company specializing in industrial and automotive solutions for the FMCG sector. His role involves guiding the strategic direction and operational excellence of EDS INDS Limited, contributing to its global reputation for quality and innovation in industrial solutions.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <h3>Director, Steadfast Funds LLP</h3>
+                    <p>Steadfast Funds LLP is created by Mr Parmahan A.P, a visionary Director, dedicated to preserving the intricate form and fresh benefits of food. With decades of experience, Mr. Parmahan A.P synthesizes economic, quality, and freshness, ensuring that all products are free from preservatives and contains foods. His mission is to advocate global excellence in product manufacturing and build trust in retail chain, ensuring the best of product applications in the market and the importance of fresh and nutritious products.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <h3>Finance Director, Samoves</h3>
+                    <p>In his current role as Finance Director at Samoves, Mr Parmahan A.P oversees financial strategies and operations for the company. Samoves specializes in eco-media-social technology solutions covering in this finance sector globally. His financial acumen and leadership have been instrumental in driving business growth and establishing a strong financial foundation for the organization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Areas of Expertise Section -->
+    <section class="expertise-section">
+        <div class="container">
+            <h2 class="expertise-title">Areas of Expertise</h2>
+            <div class="expertise-grid">
+                <div class="expertise-item">
+                    <h4>Infrastructure and Construction Management</h4>
+                    <p>Proven track record in managing and delivering large-scale infrastructure projects, including the development of over 2.5 million square feet in Chennai.</p>
+                </div>
+                <div class="expertise-item">
+                    <h4>Strategic Leadership</h4>
+                    <p>Skilled in providing strategic vision and direction for multiple organizations, ensuring sustainable growth and operational excellence.</p>
+                </div>
+                <div class="expertise-item">
+                    <h4>Power Coating Solutions</h4>
+                    <p>Expertise in power coating technology, quality products, service delivery such as the industrial, automotive, and consumer sectors.</p>
+                </div>
+                <div class="expertise-item">
+                    <h4>Business Development</h4>
+                    <p>Skilled in accessing strategic business markets and support in startups, fostering their growth and sustainability.</p>
+                </div>
+                <div class="expertise-item">
+                    <h4>Financial Leadership</h4>
+                    <p>Experienced in formulating and executing financial strategies to the Finance Director at Samoves, a global fintech leader.</p>
+                </div>
+                <div class="expertise-item">
+                    <h4>Business and Management</h4>
+                    <p>Strategic leadership in relations and environmental solutions for the FMCG sector as a Director of EDS INDS Limited.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Second Director Profile -->
+    <section class="director-profile">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-image">
+                    <img src="{{ url_for('static', filename='images/mrs.png') }}" alt="Ms. Swarnmanjal Raghunathy">
+                </div>
+                <div class="profile-info">
+                    <h2>Ms. Swarnmanjal Raghunathy</h2>
+                    <p class="position">Director</p>
+                    <p>Ms Swarnmanjal Raghunathy is a seasoned business leader and visionary strategist, currently serving as the Chairwoman of Ennadu Power Coating Solutions India Pvt Ltd, a distinguished company renowned for its excellence in Power Coating Solutions. As Engineer and her visionary leadership approach have been instrumental in establishing the company as a leading force in the industrial coating sector.</p>
+                    <p>Swarnmanjal brings a wealth of experience and expertise to her role at the organization. She is also the Founder and Director of AFH INFI Pvt Ltd, a company that has made significant contributions to the industry through innovative solutions and strategic partnerships.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Vision Section -->
+    <section class="mission-vision">
+        <div class="container">
+            <div class="mission-vision-content">
+                <div class="mission-vision-text">
+                    <h2>OUR MISSION & VISION</h2>
+                    <h3>Revolutionizing the construction industry with a blend of modern technology</h3>
+                    
+                    <div style="margin-top: 40px;">
+                        <h3>Our Mission</h3>
+                        <p>To transform the real estate landscape by delivering exceptional, high-quality, and sustainable construction solutions that exceed client expectations and set new industry standards for quality, innovation, and client satisfaction.</p>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <h3>Our Vision</h3>
+                        <p>To be a global leader in construction known for our commitment to excellence, integrity, and customer satisfaction.</p>
+                    </div>
+                </div>
+                <div class="mission-vision-image">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern Construction">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="AlphaFour Logo" class="footer-logo-img">
+                        <div class="logo-text">
+                            <h3>ALPHAFOUR</h3>
+                            <p>INFRASTRUCTURE PVT LTD</p>
+                        </div>
+                    </div>
+
+                    <div class="footer-info">
+                      <p>ALPHAFOUR INFRASTRUCTURE PVT LTD</p>
+                      <p>Kurios Software Park, 3rd Floor, Plot No:24</p>
+                      <p>2nd Cross Street, Ambattur Industrial Estate,</p>
+                      <p>Chennai 600058, Tamilnadu</p>
+                      <p style="margin-top: 15px;">sales@alphafour.com</p>
+                      <p>+91 9444314567</p>
+                  </div>
+              </div>
+              <div class="footer-right">
+                  <div class="footer-links">
+                      <h4>Terms and conditions</h4>
+                      <h4>Privacy Policy</h4>
+                      <h4>Blog</h4>
+                      <h4>Sitemap</h4>
+                      <h4>Contact us</h4>
+                  </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
+
+            // Toggle mobile menu
+            mobileMenuToggle.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            // Close mobile menu
+            mobileMenuClose.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            // Close menu when clicking outside
+            mobileMenu.addEventListener('click', function(e) {
+                if (e.target === mobileMenu) {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Handle mobile dropdown toggles
+            mobileDropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.mobile-dropdown-toggle');
+                const menu = dropdown.querySelector('.mobile-dropdown-menu');
+                
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                    menu.classList.toggle('active');
+                });
+            });
+
+            // Close mobile menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
